@@ -11,8 +11,8 @@ import ru.gogol.receivehb.kafka.utils.AppConstants;
 @Service
 public class Consumer {
 
-    @KafkaListener(topics = AppConstants.TOPIC_NAME, groupId = AppConstants.GROUP_ID)
+    @KafkaListener(topics = AppConstants.TOPIC_HB, groupId = AppConstants.GROUP_ID)
     public void listenGroupFoo(String message) {
-        log.info("Received Message in group foo: " + message);
+        log.info("Received Message_HB in group foo: " + message);
     }
 }
