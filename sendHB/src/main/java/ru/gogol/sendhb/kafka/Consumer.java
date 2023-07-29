@@ -11,9 +11,15 @@ import ru.gogol.sendhb.kafka.utils.AppConstants;
 @Service
 public class Consumer {
 
+    public interface ChangeStatus{
+        void OnReceivedChangeStatus(String message);
+    }
+
+    private final ChangeStatus changeStatus;
+
     @KafkaListener(topics = AppConstants.TOPIC_HB_STATUS, groupId = AppConstants.GROUP_ID)
     public void listenStatusTopic(String message) {
         log.info("Received HBstatus in group Groupe2: " + message);
-        AppConstants.status = message;
+        changeStatus.OnReceivedChangeStatus(message);
     }
 }

@@ -2,6 +2,7 @@ package ru.gogol.sendhb.kafka;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import ru.gogol.sendhb.kafka.utils.AppConstants;
@@ -12,10 +13,11 @@ import ru.gogol.sendhb.kafka.utils.AppConstants;
 @Service
 public class Producer {
 
-    private static final KafkaTemplate<String, String> kafkaTemplate = new KafkaTemplate<>(KafkaProducerConfig.producerFactory());
+    @Autowired
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
 
-    public static void sendMessage(String msg) {
+    public void sendMessage(String msg) {
         kafkaTemplate.send(AppConstants.TOPIC_HB,  msg);
 
     }
